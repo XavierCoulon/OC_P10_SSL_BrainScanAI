@@ -1,5 +1,19 @@
 def compute_dataset_stats(loader):
-    """Calcule la moyenne et l'écart-type de l'ensemble des images."""
+    """Calcule la moyenne et l'écart-type des images d'un DataLoader.
+
+    Cette fonction itère sur toutes les images d'un DataLoader pour calculer
+    la moyenne et l'écart-type des valeurs de pixels sur l'ensemble du dataset.
+    Ces statistiques sont utiles pour la normalisation des données.
+
+    Args:
+        loader (torch.utils.data.DataLoader): Le DataLoader contenant les
+            images à analyser. Les images doivent être des tenseurs PyTorch.
+
+    Returns:
+        tuple: Un tuple contenant deux tenseurs :
+            - Le premier tenseur est la moyenne des canaux de couleur (R, G, B).
+            - Le second tenseur est l'écart-type des canaux de couleur (R, G, B).
+    """
     mean = 0.0
     std = 0.0
     total_images = 0

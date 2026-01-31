@@ -9,6 +9,24 @@ from data_utils import BrainScanDataset
 
 
 def extract_features(csv_path, output_path):
+    """Extrait les caractéristiques d'images à l'aide d'un modèle ResNet50 pré-entraîné.
+
+    Cette fonction charge un ensemble de données d'images spécifié par un fichier CSV,
+    puis utilise un modèle ResNet50 (pré-entraîné sur ImageNet) pour extraire
+    un vecteur de caractéristiques pour chaque image. La dernière couche du modèle
+    est retirée pour obtenir le vecteur avant la classification.
+
+    Les caractéristiques extraites sont ensuite sauvegardées dans un fichier .npy.
+
+    Args:
+        csv_path (str): Le chemin vers le fichier CSV contenant les métadonnées
+            des images (notamment le chemin de chaque image).
+        output_path (str): Le chemin du fichier .npy de sortie où seront
+            sauvegardées les caractéristiques extraites.
+    
+    Returns:
+        None
+    """
     # 1. Pipeline de transformation (Standard ImageNet)
     preprocess = transforms.Compose(
         [

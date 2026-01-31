@@ -4,6 +4,18 @@ from tqdm import tqdm
 
 
 def train_one_epoch(model, loader, optimizer, criterion, device):
+    """Entraîne le modèle pour une seule époque.
+
+    Args:
+        model (torch.nn.Module): Le modèle à entraîner.
+        loader (torch.utils.data.DataLoader): Le DataLoader pour les données d'entraînement.
+        optimizer (torch.optim.Optimizer): L'optimiseur à utiliser.
+        criterion (torch.nn.Module): La fonction de perte.
+        device (torch.device): Le périphérique sur lequel effectuer les calculs.
+
+    Returns:
+        float: La perte moyenne pour l'époque.
+    """
     model.train()
     running_loss = 0.0
     for inputs, labels in tqdm(loader, leave=False):
@@ -21,6 +33,18 @@ def train_one_epoch(model, loader, optimizer, criterion, device):
 
 @torch.no_grad()
 def evaluate_model(model, loader, device, target_names=["Normal", "Cancer"]):
+    """Évalue les performances du modèle sur un ensemble de données.
+
+    Args:
+        model (torch.nn.Module): Le modèle à évaluer.
+        loader (torch.utils.data.DataLoader): Le DataLoader pour les données d'évaluation.
+        device (torch.device): Le périphérique sur lequel effectuer les calculs.
+        target_names (list, optional): Les noms des classes cibles. 
+            Défaut à ["Normal", "Cancer"].
+
+    Returns:
+        tuple: Un tuple contenant le score F1 et le rapport de classification.
+    """
     model.eval()
     all_preds = []
     all_labels = []

@@ -3,6 +3,25 @@ from pathlib import Path
 
 
 def generate_metadata(root_dir, output_file):
+    """Génère un fichier de métadonnées CSV à partir d'un répertoire d'images.
+
+    Cette fonction parcourt un répertoire racine contenant des images de deux types :
+    étiquetées et non étiquetées. Les images étiquetées sont classées dans des
+    sous-dossiers correspondant à leur label ('normal' ou 'cancer'), tandis que
+    les images non étiquetées sont regroupées dans un dossier à part.
+
+    La fonction crée un DataFrame pandas avec les informations de chaque image,
+    puis le sauvegarde dans un fichier CSV.
+
+    Args:
+        root_dir (str or Path): Le chemin vers le répertoire racine contenant les
+            dossiers d'images ('avec_labels', 'sans_label').
+        output_file (str or Path): Le chemin du fichier CSV de sortie où seront
+            sauvegardées les métadonnées.
+
+    Returns:
+        None
+    """
     root = Path(root_dir)
     data = []
 
