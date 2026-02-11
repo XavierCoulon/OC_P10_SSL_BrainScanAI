@@ -69,9 +69,9 @@ def plot_projections(projections, labels, title="Projection 2D", palette=None):
 
 
 def plot_clustering_comparison(projections, df, labels_dict, scores):
-    """Affiche la vérité terrain face aux 3 méthodes de clustering."""
+    """Affiche la vérité terrain face aux 3+ méthodes de clustering."""
     methods = ["Vérité Terrain"] + list(labels_dict.keys())
-    fig, axes = plt.subplots(1, 4, figsize=(24, 6))
+    fig, axes = plt.subplots(1, len(methods), figsize=(6 * len(methods), 6))
 
     for i, method in enumerate(methods):
         ax = axes[i]
