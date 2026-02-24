@@ -37,24 +37,57 @@ data/
 └── *.csv                  # Métadonnées
 ```
 
-## 🚀 Installation
+## � Description des scripts (`src/`)
+
+| Fichier                | Rôle                                                                             |
+| ---------------------- | -------------------------------------------------------------------------------- |
+| `make_data.py`         | Extraction des métadonnées CSV depuis le répertoire d'images (labels et chemins) |
+| `feature_extractor.py` | Extraction des vecteurs de features via ResNet50 pré-entraîné                    |
+| `models.py`            | Définition du modèle ResNet50 adapté (2 classes pour classification binaire)     |
+| `model_trainer.py`     | Fine-tuning et entraînement du modèle sur les données labellisées                |
+| `engine.py`            | Boucles d'entraînement/validation (`train_one_epoch`, `evaluate`)                |
+| `data_utils.py`        | Dataset PyTorch (`BrainScanDataset`) et transformations d'images                 |
+| `clustering_utils.py`  | Algorithmes de clustering (K-Means, Agglomérative, GMM, DBSCAN) et comparaison   |
+| `stats_utils.py`       | Calcul de moyennes et écart-types pour normalisation                             |
+| `viz_utils.py`         | Visualisations : grilles d'images, matrices de confusion, réductions PCA         |
+
+## �🚀 Installation
 
 ### Prérequis
 
 - Python >= 3.12
-- pip ou conda
+- uv
 
 ### Installation des dépendances
 
 ```bash
-make data
+uv sync
 ```
 
-Ou manuellement :
+Pour exécuter un script ou un notebook :
 
 ```bash
-pip install -e .
+uv run python script.py
 ```
+
+## 🔧 Avant de lancer les notebooks
+
+Pour que les notebooks fonctionnent correctement, vous devez d'abord exécuter les scripts de préparation dans cet ordre :
+
+```bash
+# 1. Générer les métadonnées (CSV) à partir des images
+make data
+
+# 2. Extraire les features ResNet50 (nécessaire pour clustering et modélisation)
+make features
+```
+
+**Cela générera :**
+
+- `data/metadata.csv` : Index des images avec leurs labels
+- `data/processed/features_resnet.npy` : Vecteurs de features (2048 dimensions)
+
+Ensuite, les notebooks pourront être exécutés dans l'ordre souhaité.
 
 ## 📊 Dépendances principales
 
